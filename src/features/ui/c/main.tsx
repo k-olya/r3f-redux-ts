@@ -1,5 +1,5 @@
 import { IoSettingsSharp } from "react-icons/io5";
-import { useDispatch } from "app/hooks";
+import { useDispatch } from "app/store";
 import { Button } from "./button";
 import { setScreen } from "../slice";
 

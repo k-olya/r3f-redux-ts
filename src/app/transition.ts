@@ -15,7 +15,7 @@ export const useTransition = (
   
   const time = useRef(0);
   if (b.current !== x) {
-    a.current = b.current;
+    a.current = lerp(a.current, b.current, _e(time.current / duration)); // b.current;
     b.current = x;
     time.current = 0;
     finished.current = false;

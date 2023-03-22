@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useSelector } from "app/hooks";
+import { useSelector } from "app/store";
 import { UiScreen } from "./slice";
 import { Main } from "./c/main";
 import { Settings } from "./c/settings";
