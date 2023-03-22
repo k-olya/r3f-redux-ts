@@ -19,4 +19,4 @@ export const Camera: FC<Props> = ({ near, far, position = [0, 0, 0] }) => {
     }
   });
   return null;
-}
+};

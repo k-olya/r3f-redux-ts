@@ -22,7 +22,10 @@ const playerPosition = new Vector3(0, 0, 0);
 const collisionNormal = new Vector3(0, 0, 0);
 
 export const KbMovable: FC<Props> = ({ children, speed = 1, fly }) => {
-  const { kb, collisions: { boxes } } = useSelector(s => s);
+  const {
+    kb,
+    collisions: { boxes },
+  } = useSelector((s) => s);
   const dispatch = useDispatch();
   const ref = useRef<Group>(null);
   const scaleRef = useRef<Group>(null);
@@ -63,18 +66,23 @@ export const KbMovable: FC<Props> = ({ children, speed = 1, fly }) => {
         );
       direction.copy(meta);
       if (fly) {
-      if (kb["Space"]) r.y -= delta * v.current;
-      if (kb["ShiftLeft"])
-        r.y += delta * v.current;
+        if (kb["Space"]) r.y -= delta * v.current;
+        if (kb["ShiftLeft"]) r.y += delta * v.current;
       }
 
       playerPosition.copy(ref.current.position).add(r).multiplyScalar(-1);
-      const playerXYZ: Point = [playerPosition.x, playerPosition.y, playerPosition.z];
+      const playerXYZ: Point = [
+        playerPosition.x,
+        playerPosition.y,
+        playerPosition.z,
+      ];
       let canMove = true;
       for (const box of boxes) {
         if (distanceToBox(playerXYZ, box) <= PLAYER_RADIUS) {
           const normalXYZ = distanceToBoxByCoordinates(playerXYZ, box);
-          collisionNormal.set(normalXYZ[0], normalXYZ[1], normalXYZ[2]).normalize();
+          collisionNormal
+            .set(normalXYZ[0], normalXYZ[1], normalXYZ[2])
+            .normalize();
           r.projectOnPlane(collisionNormal);
           box.onCollide && retrieveFunction(box.onCollide)();
         }
@@ -86,9 +94,5 @@ export const KbMovable: FC<Props> = ({ children, speed = 1, fly }) => {
     }
   });
 
-  return (
-      <group ref={ref}>
-        {children}
-      </group>
-  );
+  return <group ref={ref}>{children}</group>;
 };

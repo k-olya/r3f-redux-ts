@@ -27,6 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prettify": "prettier -w src/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "prettier": "^2.8.6",
     "tailwindcss": "^3.2.7"
   }
 }

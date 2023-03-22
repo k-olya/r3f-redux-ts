@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const Bobbing: FC<Props> = ({ children }) => {
-  const { kb } = useSelector(s => s);
+  const { kb } = useSelector((s) => s);
   const active = kb.KeyW || kb.KeyA || kb.KeyS || kb.KeyD;
   const ref = useRef<Group>(null);
   const [side, setSide] = useState(0);
@@ -22,7 +22,7 @@ export const Bobbing: FC<Props> = ({ children }) => {
   });
 
   useInterval(() => {
-    setSide(side => side * -1);
+    setSide((side) => side * -1);
   }, 500);
 
   useEffect(() => {
@@ -30,4 +30,4 @@ export const Bobbing: FC<Props> = ({ children }) => {
   }, [active]);
 
   return <group ref={ref}>{children}</group>;
-}
+};

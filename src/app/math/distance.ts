@@ -14,4 +14,3 @@ export function distanceSquared(p1: Point, p2: Point): number {
 export function distance(p1: Point, p2: Point): number {
   return Math.sqrt(distanceSquared(p1, p2));
 }
-

@@ -1,10 +1,10 @@
-import { Point } from "app/math/point"
+import { Point } from "app/math/point";
 
 export interface Box {
-position: Point;
-rotation: Point;
-scale: Point;
-id?: string;
+  position: Point;
+  rotation: Point;
+  scale: Point;
+  id?: string;
 }
 
 export function distanceToBoxByCoordinates(point: Point, box: Box): Point {
@@ -25,23 +25,36 @@ export function distanceToBoxByCoordinates(point: Point, box: Box): Point {
   const sinY = Math.sin(boxRotationY);
   const cosZ = Math.cos(boxRotationZ);
   const sinZ = Math.sin(boxRotationZ);
-  const rotatedPointX = localPointX * (cosY * cosZ) + localPointY * (cosY * sinZ) - localPointZ * sinY;
-  const rotatedPointY = localPointX * (sinX * sinY * cosZ - cosX * sinZ) + localPointY * (sinX * sinY * sinZ + cosX * cosZ) + localPointZ * sinX * cosY;
-  const rotatedPointZ = localPointX * (cosX * sinY * cosZ + sinX * sinZ) + localPointY * (cosX * sinY * sinZ - sinX * cosZ) + localPointZ * cosX * cosY;
+  const rotatedPointX =
+    localPointX * (cosY * cosZ) +
+    localPointY * (cosY * sinZ) -
+    localPointZ * sinY;
+  const rotatedPointY =
+    localPointX * (sinX * sinY * cosZ - cosX * sinZ) +
+    localPointY * (sinX * sinY * sinZ + cosX * cosZ) +
+    localPointZ * sinX * cosY;
+  const rotatedPointZ =
+    localPointX * (cosX * sinY * cosZ + sinX * sinZ) +
+    localPointY * (cosX * sinY * sinZ - sinX * cosZ) +
+    localPointZ * cosX * cosY;
 
   // Calculate the distance between the rotated point and the box
   const dx = Math.max(Math.abs(rotatedPointX) - 0.5, 0);
   const dy = Math.max(Math.abs(rotatedPointY) - 0.5, 0);
   const dz = Math.max(Math.abs(rotatedPointZ) - 0.5, 0);
-  return [ dx, dy, dz ];
+  return [dx, dy, dz];
 }
 
 export function distanceToBox(point: Point, box: Box): number {
-  const [ dx, dy, dz ] = distanceToBoxByCoordinates(point, box);
+  const [dx, dy, dz] = distanceToBoxByCoordinates(point, box);
   return Math.sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-export function isBoxNearPoint(boxes: Box[], point: Point, distance: number): boolean {
+export function isBoxNearPoint(
+  boxes: Box[],
+  point: Point,
+  distance: number
+): boolean {
   for (const box of boxes) {
     const dist = distanceToBox(point, box);
     if (dist <= distance) {
@@ -50,7 +63,6 @@ export function isBoxNearPoint(boxes: Box[], point: Point, distance: number): bo
   }
   return false;
 }
-
 
 /*
 export interface Box { position: [number, number, number], rotation: [number, number, number], scale: [number, number, number] }
@@ -109,7 +121,10 @@ export function isPointWithinDistanceFromBoxes(boxes: Box[], point: [number, num
   return false;
 }*/
 
-function rotate(point: [number, number, number], rotation: [number, number, number]): [number, number, number] {
+function rotate(
+  point: [number, number, number],
+  rotation: [number, number, number]
+): [number, number, number] {
   const [x, y, z] = point;
   const [rx, ry, rz] = rotation;
   const cosX = Math.cos(rx);
@@ -118,8 +133,14 @@ function rotate(point: [number, number, number], rotation: [number, number, numb
   const sinY = Math.sin(ry);
   const cosZ = Math.cos(rz);
   const sinZ = Math.sin(rz);
-  const rotatedX = x * cosY * cosZ + y * (cosX * sinZ + sinX * sinY * cosZ) + z * (sinX * sinZ - cosX * sinY * cosZ);
-  const rotatedY = -x * cosY * sinZ + y * (cosX * cosZ - sinX * sinY * sinZ) + z * (sinX * cosZ + cosX * sinY * sinZ);
+  const rotatedX =
+    x * cosY * cosZ +
+    y * (cosX * sinZ + sinX * sinY * cosZ) +
+    z * (sinX * sinZ - cosX * sinY * cosZ);
+  const rotatedY =
+    -x * cosY * sinZ +
+    y * (cosX * cosZ - sinX * sinY * sinZ) +
+    z * (sinX * cosZ + cosX * sinY * sinZ);
   const rotatedZ = x * sinY + y * -sinX * cosY + z * cosX * cosY;
   return [rotatedX, rotatedY, rotatedZ];
 }
@@ -203,7 +224,10 @@ function add(a: number[], b: number[]): number[] {
   return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 }
 
-function subtract(a: [number, number, number], b: [number, number, number]): [number, number, number] {
+function subtract(
+  a: [number, number, number],
+  b: [number, number, number]
+): [number, number, number] {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 }
 
