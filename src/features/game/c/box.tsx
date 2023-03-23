@@ -62,6 +62,7 @@ export const Box: FC<Props> = ({
     <DreiBox position={position} rotation={rotation} scale={scale} {...props}>
       {children}
       {!!color && <meshPhongMaterial color={color} />}
+      {!color && !children && <meshPhongMaterial color="whitesmoke" />}
     </DreiBox>
   );
 };
