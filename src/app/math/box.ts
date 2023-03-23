@@ -42,7 +42,7 @@ export function distanceToBoxByCoordinates(point: Point, box: Box): Point {
   const dx = Math.max(Math.abs(rotatedPointX) - 0.5, 0);
   const dy = Math.max(Math.abs(rotatedPointY) - 0.5, 0);
   const dz = Math.max(Math.abs(rotatedPointZ) - 0.5, 0);
-  return [dx, dy, dz];
+  return [dx * boxScaleX, dy * boxScaleY, dz * boxScaleZ];
 }
 
 export function distanceToBox(point: Point, box: Box): number {
