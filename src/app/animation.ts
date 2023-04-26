@@ -2,7 +2,7 @@ import { RootState, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { clamp, lerp, linear } from "app/math";
 
-export const useTransition = (
+export const useAnimation = (
   x: number,
   duration: number,
   cb: (x: number, three: RootState, delta: number) => void,

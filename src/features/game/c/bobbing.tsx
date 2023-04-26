@@ -1,5 +1,5 @@
 import { FC, ReactNode, useRef, useEffect, useState } from "react";
-import { useTransition } from "app/transition";
+import { useAnimation } from "app/animation";
 import { useInterval } from "app/interval";
 import { useSelector } from "app/store";
 import { irand, lerp } from "app/math";
@@ -22,7 +22,7 @@ export const Bobbing: FC<Props> = ({
   const ref = useRef<Group>(null);
   const [side, setSide] = useState(0);
 
-  useTransition(side, duration, (x, three, delta) => {
+  useAnimation(side, duration, (x, three, delta) => {
     if (ref.current) {
       ref.current.position.y = amplitude * x;
     }
