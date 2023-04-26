@@ -11,7 +11,7 @@ export const useAnimation = (
   const _e = easing || linear;
   const b = useRef(x);
   const a = useRef(x);
-  const finished = useRef(false);
+  const finished = useRef(true);
 
   const time = useRef(0);
   if (b.current !== x) {
